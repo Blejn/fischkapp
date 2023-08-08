@@ -4,6 +4,7 @@ import add_new from "@images/add_new.svg";
 import React from "react";
 export interface Header {
   fishkappiesLength: number;
+  changeMode: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const AppHeader = (props: Header) => (
@@ -13,7 +14,7 @@ export const AppHeader = (props: Header) => (
       <span className={styles.amount}>Cards: {props.fishkappiesLength}</span>
     </div>
     <div className={styles.right_wrapper}>
-      <button className={styles.button_add}>
+      <button onClick={props.changeMode} className={styles.button_add}>
         <img src={add_new} />
       </button>
     </div>
