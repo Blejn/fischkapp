@@ -179,6 +179,3 @@ export const Card = (props: CardI) => {
     </div>
   );
 };
-function editCard(id: string, question: string, answer: string) {
-  throw new Error("Function not implemented.");
-}
