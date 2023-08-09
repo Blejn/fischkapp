@@ -1,7 +1,6 @@
 import { AppHeader } from "./components/AppHeader";
 import { AppLayout } from "./components/AppLayout";
 import { Card } from "./components/Card";
-
 import "./App.css";
 import React, { useState } from "react";
 import { NewCard } from "./components/NewCard";
@@ -46,12 +45,19 @@ function App() {
   const changeMode = () => {
     setEditMode(!editMode);
   };
+  const addNewCard = (props: CardI) => {
+    setCards([...cards, props]);
+  };
   return (
     <AppLayout>
       <AppHeader fishkappiesLength={5} changeMode={changeMode} />
       <div className="cards_container">
         {editMode ? (
-          <NewCard editMode={editMode} setEditMode={setEditMode} />
+          <NewCard
+            editMode={editMode}
+            setEditMode={setEditMode}
+            addNewCard={addNewCard}
+          />
         ) : null}
         {cards.length > 0 && (
           <>

@@ -4,6 +4,7 @@
   background-color: white;
   width: 343px;
   min-height: 188px;
+  height: auto;
   position: relative;
   border-radius: 15px;
   border: 0.5px #ebebec solid;
