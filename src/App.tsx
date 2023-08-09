@@ -25,26 +25,7 @@ function App() {
       question: "diffrence beetwen Observable and Promise",
       answer: "Observable is better",
     },
-    {
-      id: "3",
-      question: "diffrence beetwen Observable and Promise",
-      answer: "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    },
-    {
-      id: "4",
-      question: "diffrence beetwen Observable and Promise",
-      answer:
-        "Observable is better,lorffffffffssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
-    },
-    {
-      id: "5",
-      question: "diffrence beetwen Observable and Promise",
-      answer: "elo",
-    },
   ]);
-  const changeMode = () => {
-    setEditMode(!editMode);
-  };
   const addNewCard = (props: CardI) => {
     setCards([...cards, props]);
   };
@@ -64,6 +45,10 @@ function App() {
         return card;
       })
     );
+  };
+
+  const changeMode = () => {
+    setEditMode(!editMode);
   };
   return (
     <AppLayout>
