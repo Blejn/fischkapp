@@ -12,6 +12,7 @@ interface CardI {
   id: string;
   question: string;
   answer: string;
+  deleteCard: (id: string) => void;
 }
 
 export const Card = (props: CardI) => {
@@ -72,6 +73,13 @@ export const Card = (props: CardI) => {
   const saveCardClick = () => {
     setEditMode(false);
   };
+  const deleteCardClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    id: string
+  ) => {
+    event.stopPropagation();
+    props.deleteCard(id);
+  };
 
   return (
     <div
@@ -87,7 +95,10 @@ export const Card = (props: CardI) => {
           </button>
         )}
         {nextPage && editMode ? (
-          <button className={styles.corner_button}>
+          <button
+            onClick={event => deleteCardClick(event, props.id)}
+            className={styles.corner_button}
+          >
             <img src={deleteImage} alt="delete" />
           </button>
         ) : (
