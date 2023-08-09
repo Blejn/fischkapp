@@ -16,6 +16,7 @@ interface CardI {
 
 export const Card = (props: CardI) => {
   const [editMode, setEditMode] = useState(false);
+  const [flipCard, setFlipCard] = useState(false);
   const [nextPage, setNextPage] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [height, setHeight] = useState<number>(40);
@@ -24,6 +25,7 @@ export const Card = (props: CardI) => {
     question: props.question ? props.question : "",
     answer: props.answer ? props.answer : "",
   });
+
   useEffect(() => {
     const lengthAnswer = props.answer.length;
     let counter = Math.floor(lengthAnswer / 38);
@@ -32,7 +34,13 @@ export const Card = (props: CardI) => {
       : lengthAnswer <= 38
       ? setHeight(40)
       : setHeight(height * counter);
-  }, [props.answer]);
+  }, [props.answer, setHeight]);
+
+  useEffect(() => {
+    if (editMode) {
+      textareaRef.current?.focus();
+    }
+  }, [editMode]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
@@ -51,18 +59,34 @@ export const Card = (props: CardI) => {
     setNextPage(false);
     textareaRef.current?.focus();
   };
+  const flipCardClick = () => {
+    setFlipCard(!flipCard);
+  };
+  const editCardClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setEditMode(!editMode);
+  };
+  const cancelCardClick = () => {
+    setEditMode(false);
+  };
+  const saveCardClick = () => {
+    setEditMode(false);
+  };
 
   return (
-    <div className={styles.container}>
+    <div
+      onClick={!editMode ? flipCardClick : undefined}
+      className={styles.container}
+    >
       <div className={styles.corner_wrapper}>
         {editMode ? (
           <></>
         ) : (
-          <button className={styles.corner_button}>
+          <button onClick={editCardClick} className={styles.corner_button}>
             <img src={edit} alt="edit" />
           </button>
         )}
-        {nextPage ? (
+        {nextPage && editMode ? (
           <button className={styles.corner_button}>
             <img src={deleteImage} alt="delete" />
           </button>
@@ -71,7 +95,7 @@ export const Card = (props: CardI) => {
         )}
       </div>
       <div className={styles.text_wrapper}>
-        {nextPage && (
+        {nextPage && editMode && (
           <p className={styles.question_text}>{fishkappObject.question}</p>
         )}
         {editMode ? (
@@ -82,12 +106,13 @@ export const Card = (props: CardI) => {
             ref={textareaRef}
           />
         ) : (
-          <textarea
-            readOnly
-            className={styles.output}
-            value={fishkappObject.answer}
-            style={{ height: height + "px" }}
-          ></textarea>
+          <>
+            {flipCard ? (
+              <div className={styles.output}>{fishkappObject.question}</div>
+            ) : (
+              <div className={styles.output}>{fishkappObject.answer}</div>
+            )}
+          </>
         )}
       </div>
       {editMode ? (
@@ -97,10 +122,14 @@ export const Card = (props: CardI) => {
               Back
             </button>
           ) : (
-            <button className={styles.left_button}>Cancel</button>
+            <button onClick={cancelCardClick} className={styles.left_button}>
+              Cancel
+            </button>
           )}
           {nextPage ? (
-            <button className={styles.right_button}>Save</button>
+            <button onClick={saveCardClick} className={styles.right_button}>
+              Save
+            </button>
           ) : (
             <button onClick={nextPageClick} className={styles.right_button}>
               Next
