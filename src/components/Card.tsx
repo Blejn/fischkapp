@@ -20,6 +20,9 @@ export const Card = (props: CardI) => {
   const [flipCard, setFlipCard] = useState(false);
   const [nextPage, setNextPage] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const cardareaRef = useRef<HTMLDivElement>(null);
+  const [playAnimation, setPlayAnimation] = useState(false);
+
   const [height, setHeight] = useState<number>(40);
 
   const [fishkappObject, setfishkappObject] = useState<FishkappCard>({
@@ -61,7 +64,11 @@ export const Card = (props: CardI) => {
     textareaRef.current?.focus();
   };
   const flipCardClick = () => {
-    setFlipCard(!flipCard);
+    setTimeout(() => {
+      setFlipCard(!flipCard);
+    }, 200);
+
+    timerAnimation();
   };
   const editCardClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -81,10 +88,21 @@ export const Card = (props: CardI) => {
     props.deleteCard(id);
   };
 
+  const timerAnimation = () => {
+    setPlayAnimation(true);
+    setTimeout(() => {
+      setPlayAnimation(false);
+    }, 400);
+  };
+  const animationsCard = `${styles.container} ${
+    playAnimation ? styles.flipToSide : ""
+  }`;
+
   return (
     <div
+      ref={cardareaRef}
       onClick={!editMode ? flipCardClick : undefined}
-      className={styles.container}
+      className={animationsCard}
     >
       <div className={styles.corner_wrapper}>
         {editMode ? (
