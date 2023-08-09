@@ -36,7 +36,6 @@ export const NewCard = (props: NewCardI) => {
     event.target.style.height = "0px";
     event.target.style.height = event.target.scrollHeight + "px";
   };
-
   const nextPageClick = () => {
     setNextPage(true);
     textareaRef.current?.focus();
@@ -53,8 +52,8 @@ export const NewCard = (props: NewCardI) => {
       ...fishkappObject,
       id: uuidv4(),
     };
-    props.addNewCard(updatedFishkappObject);
     props.setEditMode(!props.editMode);
+    props.addNewCard(updatedFishkappObject);
   };
 
   return (

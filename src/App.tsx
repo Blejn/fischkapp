@@ -26,9 +26,6 @@ function App() {
       answer: "Observable is better",
     },
   ]);
-  const changeMode = () => {
-    setEditMode(!editMode);
-  };
   const addNewCard = (props: CardI) => {
     setCards([...cards, props]);
   };
@@ -48,6 +45,10 @@ function App() {
         return card;
       })
     );
+  };
+
+  const changeMode = () => {
+    setEditMode(!editMode);
   };
   return (
     <AppLayout>
