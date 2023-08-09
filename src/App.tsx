@@ -48,6 +48,9 @@ function App() {
   const addNewCard = (props: CardI) => {
     setCards([...cards, props]);
   };
+  const deleteCard = (id: string) => {
+    setCards(cards.filter((card: CardI) => card.id !== id));
+  };
   return (
     <AppLayout>
       <AppHeader fishkappiesLength={5} changeMode={changeMode} />
@@ -67,6 +70,7 @@ function App() {
                 id={card.id}
                 question={card.question}
                 answer={card.answer}
+                deleteCard={deleteCard}
               />
             ))}
           </>
