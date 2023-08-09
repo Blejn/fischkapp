@@ -51,6 +51,20 @@ function App() {
   const deleteCard = (id: string) => {
     setCards(cards.filter((card: CardI) => card.id !== id));
   };
+  const editCard = (id: string, question: string, answer: string) => {
+    setCards(
+      cards.map((card: CardI) => {
+        if (card.id === id) {
+          return {
+            ...card,
+            question: question,
+            answer: answer,
+          };
+        }
+        return card;
+      })
+    );
+  };
   return (
     <AppLayout>
       <AppHeader fishkappiesLength={5} changeMode={changeMode} />
@@ -71,6 +85,7 @@ function App() {
                 question={card.question}
                 answer={card.answer}
                 deleteCard={deleteCard}
+                editCard={editCard}
               />
             ))}
           </>

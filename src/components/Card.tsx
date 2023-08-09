@@ -13,6 +13,7 @@ interface CardI {
   question: string;
   answer: string;
   deleteCard: (id: string) => void;
+  editCard: (id: string, question: string, answer: string) => void;
 }
 
 export const Card = (props: CardI) => {
@@ -54,7 +55,23 @@ export const Card = (props: CardI) => {
     event.target.style.height = "0px";
     event.target.style.height = event.target.scrollHeight + "px";
   };
-
+  const editCardClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setEditMode(!editMode);
+  };
+  const cancelCardClick = () => {
+    setfishkappObject({
+      ...fishkappObject,
+      answer: props.answer,
+      question: props.question,
+    });
+    setEditMode(false);
+  };
+  const saveCardClick = () => {
+    props.editCard(props.id, fishkappObject.question, fishkappObject.answer);
+    setNextPage(false);
+    setEditMode(false);
+  };
   const nextPageClick = () => {
     setNextPage(true);
     textareaRef.current?.focus();
@@ -70,16 +87,7 @@ export const Card = (props: CardI) => {
 
     timerAnimation();
   };
-  const editCardClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setEditMode(!editMode);
-  };
-  const cancelCardClick = () => {
-    setEditMode(false);
-  };
-  const saveCardClick = () => {
-    setEditMode(false);
-  };
+
   const deleteCardClick = (
     event: React.MouseEvent<HTMLButtonElement>,
     id: string
@@ -171,3 +179,6 @@ export const Card = (props: CardI) => {
     </div>
   );
 };
+function editCard(id: string, question: string, answer: string) {
+  throw new Error("Function not implemented.");
+}
