@@ -2,14 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./NewCard.module.css";
 import deleteImage from "@images/delete.svg";
 import { TextareaInput } from "./TextareaInput";
+import { v4 as uuidv4 } from "uuid";
 
 interface FishkappCard {
+  question: string;
+  answer: string;
+}
+interface CardI {
+  id: string;
   question: string;
   answer: string;
 }
 interface NewCardI {
   editMode: boolean;
   setEditMode: (value: boolean) => void;
+  addNewCard: (props: CardI) => void;
 }
 
 export const NewCard = (props: NewCardI) => {
@@ -39,6 +46,14 @@ export const NewCard = (props: NewCardI) => {
     textareaRef.current?.focus();
   };
   const cancelPageClick = () => {
+    props.setEditMode(!props.editMode);
+  };
+  const saveCardClick = () => {
+    const updatedFishkappObject: CardI = {
+      ...fishkappObject,
+      id: uuidv4(),
+    };
+    props.addNewCard(updatedFishkappObject);
     props.setEditMode(!props.editMode);
   };
 
@@ -76,7 +91,9 @@ export const NewCard = (props: NewCardI) => {
           </button>
         )}
         {nextPage ? (
-          <button className={styles.right_button}>Save</button>
+          <button onClick={saveCardClick} className={styles.right_button}>
+            Save
+          </button>
         ) : (
           <button onClick={nextPageClick} className={styles.right_button}>
             Next
