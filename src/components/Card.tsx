@@ -5,15 +5,15 @@ import edit from "@images/edit.svg";
 import { TextareaInput } from "./TextareaInput";
 
 interface FishkappCard {
-  question: string;
-  answer: string;
+  front: string;
+  back: string;
 }
 interface CardI {
-  id: string;
-  question: string;
-  answer: string;
-  deleteCard: (id: string) => void;
-  editCard: (id: string, question: string, answer: string) => void;
+  _id: string;
+  front: string;
+  back: string;
+  deleteCard: (_id: string) => void;
+  editCard: (_id: string, front: string, back: string) => void;
 }
 
 export const Card = (props: CardI) => {
@@ -27,19 +27,19 @@ export const Card = (props: CardI) => {
   const [height, setHeight] = useState<number>(40);
 
   const [fishkappObject, setfishkappObject] = useState<FishkappCard>({
-    question: props.question ? props.question : "",
-    answer: props.answer ? props.answer : "",
+    front: props.front ? props.front : "",
+    back: props.back ? props.back : "",
   });
 
   useEffect(() => {
-    const lengthAnswer = props.answer.length;
+    const lengthAnswer = props.back.length;
     let counter = Math.floor(lengthAnswer / 38);
     counter === 1
       ? setHeight(height * 2)
       : lengthAnswer <= 38
       ? setHeight(40)
       : setHeight(height * counter);
-  }, [props.answer, setHeight]);
+  }, [props.back, setHeight]);
 
   useEffect(() => {
     if (editMode) {
@@ -50,8 +50,8 @@ export const Card = (props: CardI) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     nextPage
-      ? setfishkappObject({ ...fishkappObject, answer: value })
-      : setfishkappObject({ ...fishkappObject, question: value });
+      ? setfishkappObject({ ...fishkappObject, back: value })
+      : setfishkappObject({ ...fishkappObject, front: value });
     event.target.style.height = "0px";
     event.target.style.height = event.target.scrollHeight + "px";
   };
@@ -62,13 +62,13 @@ export const Card = (props: CardI) => {
   const cancelCardClick = () => {
     setfishkappObject({
       ...fishkappObject,
-      answer: props.answer,
-      question: props.question,
+      back: props.back,
+      front: props.front,
     });
     setEditMode(false);
   };
   const saveCardClick = () => {
-    props.editCard(props.id, fishkappObject.question, fishkappObject.answer);
+    props.editCard(props._id, fishkappObject.front, fishkappObject.back);
     setNextPage(false);
     setEditMode(false);
   };
@@ -90,10 +90,10 @@ export const Card = (props: CardI) => {
 
   const deleteCardClick = (
     event: React.MouseEvent<HTMLButtonElement>,
-    id: string
+    _id: string
   ) => {
     event.stopPropagation();
-    props.deleteCard(id);
+    props.deleteCard(_id);
   };
 
   const timerAnimation = () => {
@@ -122,7 +122,7 @@ export const Card = (props: CardI) => {
         )}
         {nextPage && editMode ? (
           <button
-            onClick={event => deleteCardClick(event, props.id)}
+            onClick={event => deleteCardClick(event, props._id)}
             className={styles.corner_button}
           >
             <img src={deleteImage} alt="delete" />
@@ -133,7 +133,7 @@ export const Card = (props: CardI) => {
       </div>
       <div className={styles.text_wrapper}>
         {nextPage && editMode && (
-          <p className={styles.question_text}>{fishkappObject.question}</p>
+          <p className={styles.question_text}>{fishkappObject.front}</p>
         )}
         {editMode ? (
           <TextareaInput
@@ -145,9 +145,9 @@ export const Card = (props: CardI) => {
         ) : (
           <>
             {flipCard ? (
-              <div className={styles.output}>{fishkappObject.question}</div>
+              <div className={styles.output}>{fishkappObject.front}</div>
             ) : (
-              <div className={styles.output}>{fishkappObject.answer}</div>
+              <div className={styles.output}>{fishkappObject.back}</div>
             )}
           </>
         )}

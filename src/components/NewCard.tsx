@@ -5,13 +5,13 @@ import { TextareaInput } from "./TextareaInput";
 import { v4 as uuidv4 } from "uuid";
 
 interface FishkappCard {
-  question: string;
-  answer: string;
+  front: string;
+  back: string;
 }
 interface CardI {
-  id: string;
-  question: string;
-  answer: string;
+  _id: string;
+  front: string;
+  back: string;
 }
 interface NewCardI {
   editMode: boolean;
@@ -24,15 +24,15 @@ export const NewCard = (props: NewCardI) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const [fishkappObject, setfishkappObject] = useState<FishkappCard>({
-    question: "",
-    answer: "",
+    front: "",
+    back: "",
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     nextPage
-      ? setfishkappObject({ ...fishkappObject, answer: value })
-      : setfishkappObject({ ...fishkappObject, question: value });
+      ? setfishkappObject({ ...fishkappObject, front: value })
+      : setfishkappObject({ ...fishkappObject, back: value });
     event.target.style.height = "0px";
     event.target.style.height = event.target.scrollHeight + "px";
   };
@@ -50,7 +50,7 @@ export const NewCard = (props: NewCardI) => {
   const saveCardClick = () => {
     const updatedFishkappObject: CardI = {
       ...fishkappObject,
-      id: uuidv4(),
+      _id: uuidv4(),
     };
     props.setEditMode(!props.editMode);
     props.addNewCard(updatedFishkappObject);
@@ -69,7 +69,7 @@ export const NewCard = (props: NewCardI) => {
       </div>
       <div className={styles.text_wrapper}>
         {nextPage && (
-          <p className={styles.question_text}>{fishkappObject.question}</p>
+          <p className={styles.question_text}>{fishkappObject.front}</p>
         )}
 
         <TextareaInput
