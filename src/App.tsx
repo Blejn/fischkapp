@@ -8,6 +8,7 @@ import {
   getFishCards,
   addFishCard,
   deleteFishCard,
+  patchFishCard,
 } from "./services/ApiService";
 
 function App() {
@@ -57,19 +58,25 @@ function App() {
       throw error;
     }
   };
-  const editCard = (id: string, front: string, back: string) => {
-    setCards(
-      cards.map((card: CardI) => {
-        if (card._id === id) {
-          return {
-            ...card,
-            front: front,
-            back: back,
-          };
-        }
-        return card;
-      })
-    );
+  const editCard = async (id: string, front: string, back: string) => {
+    try {
+      await patchFishCard(id, front, back);
+      setCards(
+        cards.map((card: CardI) => {
+          if (card._id === id) {
+            return {
+              ...card,
+              front: front,
+              back: back,
+            };
+          }
+          return card;
+        })
+      );
+    } catch (error) {
+      console.error("Error while edit fish card:", error);
+      throw error;
+    }
   };
 
   const changeMode = () => {

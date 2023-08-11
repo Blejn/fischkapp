@@ -172,9 +172,7 @@ export const Card = (props: CardI) => {
             </button>
           )}
         </div>
-      ) : (
-        <> </>
-      )}
+      ) : null}
     </div>
   );
 };
