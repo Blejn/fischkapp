@@ -50,3 +50,21 @@ export const addFishCard = async (
     throw error;
   }
 };
+export const deleteFishCard = async (id: string): Promise<any> => {
+  const url: string =
+    "https://training.nerdbord.io/api/v1/fischkapp/flashcards";
+  try {
+    const response = await fetch(`${url}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "secret_token",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to delete FishCard");
+    }
+    return response.json();
+  } catch (error) {
+    throw error;
+  }
+};
