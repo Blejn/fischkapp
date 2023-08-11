@@ -51,7 +51,8 @@ export const addFishCard = async (
   }
 };
 export const deleteFishCard = async (id: string): Promise<any> => {
-  const url: string | undefined = import.meta.env.VITE_REACT_APP_FISHKAPP_POST;
+  const url: string =
+    "https://training.nerdbord.io/api/v1/fischkapp/flashcards";
   try {
     const response = await fetch(`${url}/${id}`, {
       method: "DELETE",
