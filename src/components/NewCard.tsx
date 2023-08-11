@@ -81,7 +81,6 @@ export const NewCard = (props: NewCardI) => {
           </button>
         )}
       </div>
-      <pre>{JSON.stringify(fishkappObject)}</pre>
     </div>
   );
 };

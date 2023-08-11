@@ -50,6 +50,35 @@ export const addFishCard = async (
     throw error;
   }
 };
+export const patchFishCard = async (
+  id: string,
+  front: string,
+  back: string
+): Promise<any> => {
+  try {
+    const url: string =
+      "https://training.nerdbord.io/api/v1/fischkapp/flashcards";
+    const response = await fetch(`${url}/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: "secret_token",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+        front: front,
+        back: back,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to edit Fishcard");
+    }
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 export const deleteFishCard = async (id: string): Promise<any> => {
   const url: string =
     "https://training.nerdbord.io/api/v1/fischkapp/flashcards";
