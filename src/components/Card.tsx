@@ -23,7 +23,6 @@ export const Card = (props: CardI) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const cardareaRef = useRef<HTMLDivElement>(null);
   const [playAnimation, setPlayAnimation] = useState(false);
-
   const [height, setHeight] = useState<number>(40);
 
   const [fishkappObject, setfishkappObject] = useState<FishkappCard>({
@@ -144,7 +143,7 @@ export const Card = (props: CardI) => {
           />
         ) : (
           <>
-            {flipCard ? (
+            {!flipCard ? (
               <div className={styles.output}>{fishkappObject.front}</div>
             ) : (
               <div className={styles.output}>{fishkappObject.back}</div>

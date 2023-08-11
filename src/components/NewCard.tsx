@@ -2,22 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./NewCard.module.css";
 import deleteImage from "@images/delete.svg";
 import { TextareaInput } from "./TextareaInput";
-import { v4 as uuidv4 } from "uuid";
-
-interface FishkappCard {
-  front: string;
-  back: string;
-}
-interface CardI {
-  _id: string;
-  front: string;
-  back: string;
-}
-interface NewCardI {
-  editMode: boolean;
-  setEditMode: (value: boolean) => void;
-  addNewCard: (props: CardI) => void;
-}
 
 export const NewCard = (props: NewCardI) => {
   const [nextPage, setNextPage] = useState(false);
@@ -29,31 +13,29 @@ export const NewCard = (props: NewCardI) => {
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = event.target;
     nextPage
-      ? setfishkappObject({ ...fishkappObject, front: value })
-      : setfishkappObject({ ...fishkappObject, back: value });
+      ? setfishkappObject({ ...fishkappObject, back: event.target.value })
+      : setfishkappObject({ ...fishkappObject, front: event.target.value });
     event.target.style.height = "0px";
     event.target.style.height = event.target.scrollHeight + "px";
   };
   const nextPageClick = () => {
-    setNextPage(true);
+    setNextPage(prevNextPage => !prevNextPage);
+
     textareaRef.current?.focus();
   };
   const backPageClick = () => {
-    setNextPage(false);
+    setNextPage(prevNextPage => !prevNextPage);
+
     textareaRef.current?.focus();
   };
   const cancelPageClick = () => {
     props.setEditMode(!props.editMode);
   };
   const saveCardClick = () => {
-    const updatedFishkappObject: CardI = {
-      ...fishkappObject,
-      _id: uuidv4(),
-    };
+    const updatedFishkappObject: FishkappCard = fishkappObject;
     props.setEditMode(!props.editMode);
-    props.addNewCard(updatedFishkappObject);
+    props.addNewCard(updatedFishkappObject.front, updatedFishkappObject.back);
   };
 
   return (
@@ -99,6 +81,7 @@ export const NewCard = (props: NewCardI) => {
           </button>
         )}
       </div>
+      <pre>{JSON.stringify(fishkappObject)}</pre>
     </div>
   );
 };
