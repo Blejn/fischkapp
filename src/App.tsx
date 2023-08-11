@@ -4,7 +4,11 @@ import { Card } from "./components/Card";
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import { NewCard } from "./components/NewCard";
-import { getFishCards, addFishCard } from "./services/ApiService";
+import {
+  getFishCards,
+  addFishCard,
+  deleteFishCard,
+} from "./services/ApiService";
 
 function App() {
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -20,8 +24,14 @@ function App() {
       });
   }, []);
 
-  const deleteCard = (id: string) => {
-    setCards(cards.filter((card: CardI) => card._id !== id));
+  const deleteCard = async (id: string) => {
+    try {
+      await deleteFishCard(id);
+
+      setCards(cards.filter((card: CardI) => card._id !== id));
+    } catch (error) {
+      console.error("Error while deleting card:", error);
+    }
   };
 
   const getCards = async () => {
