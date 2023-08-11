@@ -53,7 +53,7 @@ export const addFishCard = async (
 export const deleteFishCard = async (id: string): Promise<any> => {
   const url: string | undefined = import.meta.env.VITE_REACT_APP_FISHKAPP_POST;
   try {
-    const response = await fetch(url + "/" + id, {
+    const response = await fetch(`${url}/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: "secret_token",
