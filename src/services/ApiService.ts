@@ -1,5 +1,6 @@
 export const getFishCards = async (): Promise<CardI[]> => {
-  const url: string | undefined = import.meta.env.VITE_REACT_APP_FISHKAPP_POST;
+  const url: string | undefined =
+    "https://training.nerdbord.io/api/v1/fischkapp/flashcards";
   if (!url) {
     console.error("FISHKAPP_POST environment variable is not set.");
     throw new Error("FISHKAPP_POST environment variable is not set.");
@@ -23,10 +24,20 @@ export const addFishCard = async (
   front: string,
   back: string
 ): Promise<ResponseCard> => {
-  const url: string | undefined = import.meta.env.VITE_REACT_APP_FISHKAPP_POST;
+  const url: string | undefined =
+    "https://training.nerdbord.io/api/v1/fischkapp/flashcards";
   if (!url) {
     console.error("FISHKAPP_POST environment variable is not set.");
     throw new Error("FISHKAPP_POST environment variable is not set.");
+  }
+  if (!front && !back) {
+    throw new Error("Front and back are required");
+  }
+  if (!front) {
+    throw new Error("Front is required");
+  }
+  if (!back) {
+    throw new Error("Back is required");
   }
 
   try {
