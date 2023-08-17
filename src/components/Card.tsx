@@ -115,20 +115,23 @@ export const Card = (props: CardI) => {
         {editMode ? (
           <></>
         ) : (
-          <button onClick={editCardClick} className={styles.corner_button}>
+          <button
+            data-testid="edit-button"
+            onClick={editCardClick}
+            className={styles.corner_button}
+          >
             <img src={edit} alt="edit" />
           </button>
         )}
-        {nextPage && editMode ? (
+        {editMode ? (
           <button
+            data-testid="delete-button"
             onClick={event => deleteCardClick(event, props._id)}
             className={styles.corner_button}
           >
             <img src={deleteImage} alt="delete" />
           </button>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
       <div className={styles.text_wrapper}>
         {nextPage && editMode && (

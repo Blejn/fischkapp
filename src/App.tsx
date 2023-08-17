@@ -97,6 +97,7 @@ function App() {
           <>
             {cards.map(card => (
               <Card
+                data-testid="card"
                 key={card._id}
                 _id={card._id}
                 front={card.front}

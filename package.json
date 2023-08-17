@@ -14,7 +14,9 @@
     "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "uuid": "^9.0.0"
+    "svg-jest": "^1.0.1",
+    "uuid": "^9.0.0",
+    "whatwg-fetch": "^3.6.17"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",
@@ -44,13 +46,5 @@
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6",
     "vite": "^4.4.0"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "ts-jest"
-    },
-    "moduleNameMapper": {
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
-    }
   }
 }
