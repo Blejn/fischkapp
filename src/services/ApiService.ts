@@ -2,7 +2,6 @@ export const getFishCards = async (): Promise<CardI[]> => {
   const url: string | undefined =
     "https://training.nerdbord.io/api/v1/fischkapp/flashcards";
   if (!url) {
-    console.error("FISHKAPP_POST environment variable is not set.");
     throw new Error("FISHKAPP_POST environment variable is not set.");
   }
   try {
@@ -27,7 +26,6 @@ export const addFishCard = async (
   const url: string | undefined =
     "https://training.nerdbord.io/api/v1/fischkapp/flashcards";
   if (!url) {
-    console.error("FISHKAPP_POST environment variable is not set.");
     throw new Error("FISHKAPP_POST environment variable is not set.");
   }
   if (!front && !back) {

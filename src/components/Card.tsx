@@ -110,25 +110,29 @@ export const Card = (props: CardI) => {
       ref={cardareaRef}
       onClick={!editMode ? flipCardClick : undefined}
       className={animationsCard}
+      data-testid="card"
     >
       <div className={styles.corner_wrapper}>
         {editMode ? (
           <></>
         ) : (
-          <button onClick={editCardClick} className={styles.corner_button}>
+          <button
+            data-testid="edit-button"
+            onClick={editCardClick}
+            className={styles.corner_button}
+          >
             <img src={edit} alt="edit" />
           </button>
         )}
-        {nextPage && editMode ? (
+        {editMode ? (
           <button
+            data-testid="delete-button"
             onClick={event => deleteCardClick(event, props._id)}
             className={styles.corner_button}
           >
             <img src={deleteImage} alt="delete" />
           </button>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
       <div className={styles.text_wrapper}>
         {nextPage && editMode && (
