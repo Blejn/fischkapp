@@ -43,10 +43,6 @@ describe("Card integration tests", () => {
   test("deleting card from list", async () => {
     // Render your App component
     render(<App />);
-    await waitFor(() => {
-      const initialCardCount = screen.queryAllByTestId("card").length;
-      console.log(initialCardCount);
-    });
 
     // Get the initial number of cards
     await waitFor(() => {
