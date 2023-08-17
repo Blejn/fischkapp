@@ -110,6 +110,7 @@ export const Card = (props: CardI) => {
       ref={cardareaRef}
       onClick={!editMode ? flipCardClick : undefined}
       className={animationsCard}
+      data-testid="card"
     >
       <div className={styles.corner_wrapper}>
         {editMode ? (
