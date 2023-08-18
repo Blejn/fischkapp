@@ -106,13 +106,11 @@ describe("edit fish card", () => {
     fireEvent.click(nextButton);
 
     const saveButton = await screen.findByTestId("save-button");
-    console.log(saveButton);
     fireEvent.click(saveButton);
     expect(saveButton).toBeDisabled();
   });
 
   it("should exit edit mode when Cancel button is clicked", () => {
-    // Przygotowanie danych i funkcji pomocniczych
     const mockEditCard = jest.fn();
     const mockDeleteCard = jest.fn();
     const cardProps = {
@@ -123,17 +121,36 @@ describe("edit fish card", () => {
       editCard: mockEditCard,
     };
 
-    // Renderowanie komponentu Card
     render(<Card {...cardProps} />);
 
-    // Kliknięcie przycisku Edytuj, aby wejść w tryb edycji
     const editButton = screen.getByTestId("edit-button");
     fireEvent.click(editButton);
 
-    // Kliknięcie przycisku Anuluj
     const cancelButton = screen.getByText("Cancel");
     fireEvent.click(cancelButton);
 
     expect(screen.getByTestId("edit-button")).toBeInTheDocument();
+  });
+  it("should exit edit mode when Cancel button is clicked", async () => {
+    // Przygotowanie danych i funkcji pomocniczych
+    const cardVariable: CardI = {
+      _id: "12345",
+      front: "front",
+      back: "back",
+      deleteCard: jest.fn(),
+      editCard: jest.fn(),
+    };
+
+    render(<Card {...cardVariable} />);
+
+    const editButton = await screen.getByTestId("edit-button");
+    fireEvent.click(editButton);
+
+    const nextButton = await screen.findByTestId("next-button");
+    fireEvent.click(nextButton);
+
+    const saveButton = await screen.findByTestId("save-button");
+    fireEvent.click(saveButton);
+    expect(saveButton).toBeEnabled();
   });
 });
