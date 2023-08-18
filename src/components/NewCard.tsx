@@ -72,7 +72,15 @@ export const NewCard = (props: NewCardI) => {
           </button>
         )}
         {nextPage ? (
-          <button onClick={saveCardClick} className={styles.right_button}>
+          <button
+            disabled={
+              fishkappObject.front == "" || fishkappObject.back == ""
+                ? true
+                : false
+            }
+            onClick={saveCardClick}
+            className={styles.right_button}
+          >
             Save
           </button>
         ) : (
