@@ -93,9 +93,9 @@
   line-height: 20px;
   overflow-wrap: break-word;
   padding: 12px 10px 10px 10px;
-  &:focus {
-    outline: none;
-  }
+}
+.output:focus {
+  outline: none;
 }
 
 @keyframes flipToSide {
