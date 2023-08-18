@@ -1,8 +1,7 @@
-import { response, rest } from "msw";
+import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { patchFishCard } from "../services/ApiService";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import App from "../App";
 import React from "react";
 import { Card } from "../components/Card";
 interface CardI {
@@ -132,7 +131,6 @@ describe("edit fish card", () => {
     expect(screen.getByTestId("edit-button")).toBeInTheDocument();
   });
   it("should exit edit mode when Cancel button is clicked", async () => {
-    // Przygotowanie danych i funkcji pomocniczych
     const cardVariable: CardI = {
       _id: "12345",
       front: "front",

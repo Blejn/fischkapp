@@ -1,11 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { rest } from "msw";
-import { Card } from "../components/Card";
 import { setupServer } from "msw/node";
 import App from "../App";
 const server = setupServer(
-  // Mock your API requests here
   rest.get(
     "https://training.nerdbord.io/api/v1/fischkapp/flashcards",
     (req, res, ctx) => {
@@ -16,7 +14,7 @@ const server = setupServer(
           { _id: "1435", front: "front", back: "back" },
           { _id: "1455", front: "front", back: "back" },
         ])
-      ); // Mock an empty response for testing
+      );
     }
   ),
   rest.delete(
@@ -41,10 +39,8 @@ afterAll(() => server.close());
 
 describe("Card integration tests", () => {
   test("deleting card from list", async () => {
-    // Render your App component
     render(<App />);
 
-    // Get the initial number of cards
     await waitFor(() => {
       const editButton = screen.getAllByTestId("edit-button")[0];
       fireEvent.click(editButton);
