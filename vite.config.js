@@ -10,6 +10,7 @@ export default defineConfig({
       "@tests": "/src/tests", // Dodaj alias do folderu ze zdjęciami
     },
   },
+  base: "/fischkapp",
   test: {
     globals: true,
     environment: "jsdom",
