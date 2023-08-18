@@ -162,16 +162,33 @@ export const Card = (props: CardI) => {
               Back
             </button>
           ) : (
-            <button onClick={cancelCardClick} className={styles.left_button}>
+            <button
+              data-testid="cancel-button"
+              onClick={cancelCardClick}
+              className={styles.left_button}
+            >
               Cancel
             </button>
           )}
           {nextPage ? (
-            <button onClick={saveCardClick} className={styles.right_button}>
+            <button
+              data-testid="save-button"
+              disabled={
+                fishkappObject.front == "" || fishkappObject.back == ""
+                  ? true
+                  : false
+              }
+              onClick={saveCardClick}
+              className={styles.right_button}
+            >
               Save
             </button>
           ) : (
-            <button onClick={nextPageClick} className={styles.right_button}>
+            <button
+              data-testid="next-button"
+              onClick={nextPageClick}
+              className={styles.right_button}
+            >
               Next
             </button>
           )}
