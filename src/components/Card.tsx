@@ -31,20 +31,22 @@ export const Card = (props: CardI) => {
   });
 
   useEffect(() => {
-    const lengthAnswer = props.back.length;
-    let counter = Math.floor(lengthAnswer / 38);
-    counter === 1
-      ? setHeight(height * 2)
-      : lengthAnswer <= 38
-      ? setHeight(40)
-      : setHeight(height * counter);
-  }, [props.back, setHeight]);
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
+    }
+  }, [nextPage, editMode]);
 
   useEffect(() => {
     if (editMode) {
       textareaRef.current?.focus();
+      const length = textareaRef.current?.value.length as number;
+      textareaRef.current?.setSelectionRange(length, length);
+      const height = textareaRef.current?.scrollHeight as number;
+      setHeight(height);
     }
-  }, [editMode]);
+  }, [editMode, nextPage]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
@@ -73,11 +75,15 @@ export const Card = (props: CardI) => {
   };
   const nextPageClick = () => {
     setNextPage(true);
-    textareaRef.current?.focus();
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
   };
   const backPageClick = () => {
     setNextPage(false);
-    textareaRef.current?.focus();
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
   };
   const flipCardClick = () => {
     setTimeout(() => {
@@ -148,13 +154,19 @@ export const Card = (props: CardI) => {
         ) : (
           <>
             {!flipCard ? (
-              <div className={styles.output}>{fishkappObject.front}</div>
+              <div className={styles.output}>
+                <div>{fishkappObject.front}</div>
+              </div>
             ) : (
-              <div className={styles.output}>{fishkappObject.back}</div>
+              <div className={styles.output}>
+                {" "}
+                <div>{fishkappObject.back}</div>
+              </div>
             )}
           </>
         )}
       </div>
+      {!editMode && <div className={styles.empty_wrapper}></div>}
       {editMode ? (
         <div className={styles.action_wrapper}>
           {nextPage ? (

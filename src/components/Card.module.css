@@ -1,16 +1,16 @@
 .container {
+  background-color: white;
+  min-height: 188px;
+  min-width: 343px;
+  margin: 15px;
+  border: 1px solid rgba(235, 235, 236, 1);
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
-  background-color: white;
-  width: 343px;
-  position: relative;
-  min-height: 188px;
-  border-radius: 15px;
-  border: 0.5px #ebebec solid;
   justify-content: space-between;
   align-items: center;
-  flex-grow: 1;
 }
+
 .corner_wrapper {
   display: flex;
   flex-direction: row;
@@ -18,26 +18,27 @@
   height: 40px;
   justify-content: flex-end;
 }
+.empty_wrapper {
+  width: 343px;
+  height: 40px;
+}
+
 .corner_button {
-  position: relative;
   background: transparent;
   border: none;
   width: 40px;
-  height: 40px;
   cursor: pointer;
   z-index: 1;
 }
+
 .text_wrapper {
-  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
 }
+
 .question_text {
-  position: relative;
-  bottom: 0;
   color: #161616;
   font-size: 12px;
   font-family: Lexend;
@@ -46,14 +47,13 @@
   word-wrap: break-word;
   margin: 0 15px 0;
 }
+
 .action_wrapper {
   display: flex;
   flex-direction: row;
-  position: absolute;
-  align-self: end;
   gap: 10px;
-  bottom: 14px;
-  right: 14px;
+  align-self: flex-end;
+  margin: 10px 5px 5px 0px;
 }
 .left_button {
   width: 110px;
@@ -82,7 +82,7 @@
 .output {
   text-align: center;
   justify-content: center;
-
+  margin: auto auto;
   border: none;
   color: #161616;
   font-size: 16px;
@@ -91,6 +91,8 @@
   resize: none;
   overflow: hidden;
   line-height: 20px;
+  height: auto;
+  max-height: 200px;
   overflow-wrap: break-word;
   padding: 12px 10px 10px 10px;
 }

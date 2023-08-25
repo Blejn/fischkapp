@@ -1,13 +1,12 @@
 .container {
+  background-color: white;
+  min-height: 188px;
+  min-width: 343px;
+  margin: 15px;
+  border: 1px solid rgba(235, 235, 236, 1);
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
-  background-color: white;
-  width: 343px;
-  min-height: 188px;
-  height: auto;
-  position: relative;
-  border-radius: 15px;
-  border: 0.5px #ebebec solid;
   justify-content: space-between;
   align-items: center;
 }
@@ -17,6 +16,10 @@
   width: 343px;
   height: 40px;
   justify-content: flex-end;
+}
+.empty_wrapper {
+  width: 343px;
+  height: 40px;
 }
 .corner_button {
   position: relative;
@@ -43,11 +46,9 @@
 .action_wrapper {
   display: flex;
   flex-direction: row;
-  position: absolute;
-  align-self: end;
   gap: 10px;
-  bottom: 14px;
-  right: 14px;
+  align-self: flex-end;
+  margin: 10px 5px 5px 0px;
 }
 .left_button {
   width: 110px;

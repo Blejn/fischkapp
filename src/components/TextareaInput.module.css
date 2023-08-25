@@ -1,6 +1,5 @@
 .input_text {
   display: block;
-  margin: 8px 14px 75px;
   color: #161616;
   font-size: 16px;
   width: 315px;
@@ -9,10 +8,11 @@
   font-weight: 500;
   resize: none;
   overflow: hidden;
+
   line-height: 20px;
   overflow-wrap: break-word;
   padding: 12px 10px 10px 10px;
 }
-.output:focus {
+.input_text:focus {
   outline: none;
 }
