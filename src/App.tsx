@@ -93,7 +93,7 @@ function App() {
             addNewCard={uploadCard}
           />
         ) : null}
-        {cards && (
+        {cards.length > 0 ? (
           <>
             {cards.map(card => (
               <Card
@@ -106,6 +106,8 @@ function App() {
               />
             ))}
           </>
+        ) : (
+          <div>No cards</div>
         )}
       </div>
     </AppLayout>

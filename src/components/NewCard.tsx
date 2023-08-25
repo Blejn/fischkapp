@@ -12,6 +12,14 @@ export const NewCard = (props: NewCardI) => {
     back: "",
   });
 
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "39px";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
+    }
+  }, [nextPage]);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     nextPage
       ? setfishkappObject({ ...fishkappObject, back: event.target.value })
@@ -40,15 +48,7 @@ export const NewCard = (props: NewCardI) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.corner_wrapper}>
-        {nextPage ? (
-          <button className={styles.corner_button}>
-            <img src={deleteImage} alt="delete" />
-          </button>
-        ) : (
-          <></>
-        )}
-      </div>
+      <div className={styles.empty_wrapper}></div>
       <div className={styles.text_wrapper}>
         {nextPage && (
           <p className={styles.question_text}>{fishkappObject.front}</p>
