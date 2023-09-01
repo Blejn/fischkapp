@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  z-index: 0;
 }
 
 .corner_wrapper {
@@ -28,7 +29,6 @@
   border: none;
   width: 40px;
   cursor: pointer;
-  z-index: 1;
 }
 
 .text_wrapper {
@@ -36,6 +36,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+}
+.question_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .question_text {
@@ -53,7 +60,7 @@
   flex-direction: row;
   gap: 10px;
   align-self: flex-end;
-  margin: 10px 5px 5px 0px;
+  margin: 10px 14px 14px 0px;
 }
 .left_button {
   width: 110px;
@@ -78,6 +85,17 @@
   word-wrap: break-word;
   font-weight: 500;
   cursor: pointer;
+}
+/* .left_button:focus {
+  outline: none;
+  background: transparent;
+  outline: none;
+  background-color: red;
+} */
+.left_button:active {
+  outline: none;
+  background: none;
+  outline: none;
 }
 .output {
   text-align: center;

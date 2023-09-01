@@ -1,11 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;500&family=Lexend:wght@400;500;600&display=swap");
 .header {
+  position: fixed;
+  z-index: 2;
   height: 60px;
+  width: 375px;
   background: #fff;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .logo {
   max-width: 32px;

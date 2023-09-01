@@ -30,7 +30,17 @@
   cursor: pointer;
 }
 .text_wrapper {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.question_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 .question_text {
   position: relative;
@@ -48,7 +58,7 @@
   flex-direction: row;
   gap: 10px;
   align-self: flex-end;
-  margin: 10px 5px 5px 0px;
+  margin: 10px 14px 14px 0px;
 }
 .left_button {
   width: 110px;
