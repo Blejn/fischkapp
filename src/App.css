@@ -14,6 +14,7 @@ body {
   overflow-x: hidden;
   max-height: 695px;
   overflow-y: auto;
+  z-index: 0;
 }
 .cards_container::-webkit-scrollbar {
   width: 0.5em; /* Szerokość paska przewijania */
@@ -21,4 +22,16 @@ body {
 }
 .cards_container::-webkit-scrollbar-thumb {
   background-color: #888; /* Kolor paska przewijania */
+}
+.header {
+  max-width: 375px;
+  background: transparent;
+  height: 60px;
+}
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
 }

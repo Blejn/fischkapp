@@ -84,7 +84,9 @@ function App() {
   };
   return (
     <AppLayout>
-      <AppHeader fishkappiesLength={cards.length} changeMode={changeMode} />
+      <div className="header">
+        <AppHeader fishkappiesLength={cards.length} changeMode={changeMode} />
+      </div>
       <div className="cards_container">
         {editMode ? (
           <NewCard

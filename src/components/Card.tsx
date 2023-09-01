@@ -32,7 +32,7 @@ export const Card = (props: CardI) => {
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = "39px";
       textareaRef.current.style.height =
         textareaRef.current.scrollHeight + "px";
     }
@@ -142,7 +142,9 @@ export const Card = (props: CardI) => {
       </div>
       <div className={styles.text_wrapper}>
         {nextPage && editMode && (
-          <p className={styles.question_text}>{fishkappObject.front}</p>
+          <div className={styles.question_wrapper}>
+            <p className={styles.question_text}>{fishkappObject.front}</p>
+          </div>
         )}
         {editMode ? (
           <TextareaInput

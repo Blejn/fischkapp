@@ -51,7 +51,9 @@ export const NewCard = (props: NewCardI) => {
       <div className={styles.empty_wrapper}></div>
       <div className={styles.text_wrapper}>
         {nextPage && (
-          <p className={styles.question_text}>{fishkappObject.front}</p>
+          <div className={styles.question_wrapper}>
+            <p className={styles.question_text}>{fishkappObject.front}</p>
+          </div>
         )}
 
         <TextareaInput
