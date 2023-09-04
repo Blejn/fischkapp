@@ -61,9 +61,6 @@ describe("edit fish card", () => {
     const editButton = screen.getByTestId("edit-button");
     fireEvent.click(editButton);
 
-    const nextButton = await screen.findByTestId("next-button");
-    fireEvent.click(nextButton);
-
     const saveButton = await screen.findByTestId("save-button");
     fireEvent.click(saveButton);
     expect(saveButton).toBeDisabled();
@@ -81,9 +78,6 @@ describe("edit fish card", () => {
     const editButton = screen.getByTestId("edit-button");
     fireEvent.click(editButton);
 
-    const nextButton = await screen.findByTestId("next-button");
-    fireEvent.click(nextButton);
-
     const saveButton = await screen.findByTestId("save-button");
     fireEvent.click(saveButton);
     expect(saveButton).toBeDisabled();
@@ -100,9 +94,6 @@ describe("edit fish card", () => {
     render(<Card {...cardVariable} />);
     const editButton = screen.getByTestId("edit-button");
     fireEvent.click(editButton);
-
-    const nextButton = await screen.findByTestId("next-button");
-    fireEvent.click(nextButton);
 
     const saveButton = await screen.findByTestId("save-button");
     fireEvent.click(saveButton);
@@ -143,9 +134,6 @@ describe("edit fish card", () => {
 
     const editButton = await screen.getByTestId("edit-button");
     fireEvent.click(editButton);
-
-    const nextButton = await screen.findByTestId("next-button");
-    fireEvent.click(nextButton);
 
     const saveButton = await screen.findByTestId("save-button");
     fireEvent.click(saveButton);
