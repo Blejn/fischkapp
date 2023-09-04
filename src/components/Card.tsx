@@ -3,6 +3,7 @@ import styles from "./Card.module.css";
 import deleteImage from "@images/delete.svg";
 import edit from "@images/edit.svg";
 import { TextareaInput } from "./TextareaInput";
+import { EditTextareaInput } from "./EditTextareaInput";
 
 interface FishkappCard {
   front: string;
@@ -50,7 +51,8 @@ export const Card = (props: CardI) => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
-    nextPage
+
+    flipCard
       ? setfishkappObject({ ...fishkappObject, back: value })
       : setfishkappObject({ ...fishkappObject, front: value });
     event.target.style.height = "0px";
@@ -59,6 +61,9 @@ export const Card = (props: CardI) => {
   const editCardClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setEditMode(!editMode);
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
   };
   const cancelCardClick = () => {
     setfishkappObject({
@@ -73,18 +78,7 @@ export const Card = (props: CardI) => {
     setNextPage(false);
     setEditMode(false);
   };
-  const nextPageClick = () => {
-    setNextPage(true);
-    if (textareaRef.current) {
-      textareaRef.current.focus();
-    }
-  };
-  const backPageClick = () => {
-    setNextPage(false);
-    if (textareaRef.current) {
-      textareaRef.current.focus();
-    }
-  };
+
   const flipCardClick = () => {
     setTimeout(() => {
       setFlipCard(!flipCard);
@@ -120,7 +114,13 @@ export const Card = (props: CardI) => {
     >
       <div className={styles.corner_wrapper}>
         {editMode ? (
-          <></>
+          <button
+            data-testid="delete-button"
+            onClick={event => deleteCardClick(event, props._id)}
+            className={styles.corner_button}
+          >
+            <img src={deleteImage} alt="delete" />
+          </button>
         ) : (
           <button
             data-testid="edit-button"
@@ -130,15 +130,6 @@ export const Card = (props: CardI) => {
             <img src={edit} alt="edit" />
           </button>
         )}
-        {editMode ? (
-          <button
-            data-testid="delete-button"
-            onClick={event => deleteCardClick(event, props._id)}
-            className={styles.corner_button}
-          >
-            <img src={deleteImage} alt="delete" />
-          </button>
-        ) : null}
       </div>
       <div className={styles.text_wrapper}>
         {nextPage && editMode && (
@@ -147,9 +138,9 @@ export const Card = (props: CardI) => {
           </div>
         )}
         {editMode ? (
-          <TextareaInput
+          <EditTextareaInput
             fishkappObject={fishkappObject}
-            nextPage={nextPage}
+            nextPage={flipCard}
             handleInputChange={handleInputChange}
             ref={textareaRef}
           />
@@ -171,41 +162,26 @@ export const Card = (props: CardI) => {
       {!editMode && <div className={styles.empty_wrapper}></div>}
       {editMode ? (
         <div className={styles.action_wrapper}>
-          {nextPage ? (
-            <button onClick={backPageClick} className={styles.left_button}>
-              Back
-            </button>
-          ) : (
-            <button
-              data-testid="cancel-button"
-              onClick={cancelCardClick}
-              className={styles.left_button}
-            >
-              Cancel
-            </button>
-          )}
-          {nextPage ? (
-            <button
-              data-testid="save-button"
-              disabled={
-                fishkappObject.front == "" || fishkappObject.back == ""
-                  ? true
-                  : false
-              }
-              onClick={saveCardClick}
-              className={styles.right_button}
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              data-testid="next-button"
-              onClick={nextPageClick}
-              className={styles.right_button}
-            >
-              Next
-            </button>
-          )}
+          <button
+            data-testid="cancel-button"
+            onClick={cancelCardClick}
+            className={styles.left_button}
+          >
+            Cancel
+          </button>
+
+          <button
+            data-testid="save-button"
+            disabled={
+              fishkappObject.front == "" || fishkappObject.back == ""
+                ? true
+                : false
+            }
+            onClick={saveCardClick}
+            className={styles.right_button}
+          >
+            Save
+          </button>
         </div>
       ) : null}
     </div>

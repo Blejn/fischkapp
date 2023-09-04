@@ -21,3 +21,8 @@ interface InputArea {
   nextPage: boolean;
   handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
+interface EditInputArea {
+  fishkappObject: FishkappCard;
+  nextPage: boolean;
+  handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}

@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     getCards()
       .then(cardsArray => {
-        setCards(cardsArray);
+        setCards(cardsArray.reverse());
       })
       .catch(error => {
         console.error("Error", error);
@@ -50,8 +50,8 @@ function App() {
       const res = await addFishCard(front, back);
       const newCard = res.flashcard;
       setCards([
-        ...cards,
         { _id: newCard._id, front: newCard.front, back: newCard.back },
+        ...cards,
       ]);
     } catch (error) {
       console.error("Error while adding fish Card:", error);
